@@ -17,8 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function getForecast(city) {
+    let apiKey;
 	try {
-		let API_KEY = await fetch(
+		apiKey = await fetch(
 			"https://jdev128-weather.netlify.app/open-weather-secret"
 		).then((response) => response.text());
 	} catch (error) {
@@ -27,7 +28,7 @@ async function getForecast(city) {
 		);
 	}
 	return fetch(
-		`${BASE_URL}?units=metric&lang=es&appid=${API_KEY}&q=${city}`
+		`${BASE_URL}?units=metric&lang=es&appid=${apiKey}&q=${city}`
 	).then((response) => {
 		if (response.ok) {
 			return response.json();
