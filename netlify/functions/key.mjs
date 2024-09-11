@@ -1,7 +1,7 @@
 export default async (req, context) => {
 
     const REFERER = req.headers.get("Referer");
-    console.log(context.site.url);
+    console.log(REFERER, context.site.url);
     if (REFERER === context.site.url) {
         return new Response(Netlify.env.get("OPEN_WEATHER_KEY"));
     } else {
