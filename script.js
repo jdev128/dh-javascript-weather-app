@@ -20,7 +20,7 @@ async function getForecast(city) {
     let apiKey;
 	try {
 		apiKey = await fetch(
-			"https://localhost/open-weather-secret"
+			"https://jdev128-weather.netlify.app/open-weather-secret"
 		).then((response) => response.text());
 	} catch (error) {
 		throw new Error(
