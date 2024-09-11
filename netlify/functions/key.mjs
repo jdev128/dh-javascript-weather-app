@@ -1,9 +1,12 @@
 export default async (req, context) => {
 
-    console.log("Referer: ", req.headers.get("Referer"));
-    console.log("Origin: ", req.headers.get("Origin"));
+    const REFERER = req.headers.get("Referer");
+    if (REFERER = context.site.url) {
+        return new Response(Netlify.env.get("OPEN_WEATHER_KEY"));
+    } else {
+        return new Response(null, {status: 401});
+    }
 
-	return new Response(Netlify.env.get("OPEN_WEATHER_KEY"));
 };
 
 export const config = {
