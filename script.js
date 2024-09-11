@@ -1,23 +1,31 @@
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
-const API_KEY = "OPEN_WEATHER_API_KEY";
 
 document.addEventListener("DOMContentLoaded", () => {
 	document.querySelector("button#search").addEventListener("click", () => {
-        const CITY = document.querySelector("input#city").value.trim();
+		const CITY = document.querySelector("input#city").value.trim();
 		if (CITY.length >= 3) {
 			getForecast(CITY)
 				.then((forecast) => showForecast(forecast))
 				.catch((error) => {
-                    document.getElementById("forecast-container").innerHTML =
-					error.message;
-                });
+					document.getElementById("forecast-container").innerHTML =
+						error.message;
+				});
 		} else {
 			alert("Debes ingresar tres letras como mínimo");
 		}
 	});
 });
 
-function getForecast(city) {
+async function getForecast(city) {
+	try {
+		let API_KEY = await fetch(
+			"https://jdev128-weather.netlify.app/open-weather-secret"
+		).then((response) => response.text());
+	} catch (error) {
+		throw new Error(
+			"Error al autenticarse ante el servidor. Por favor, contactate con el desarrollador."
+		);
+	}
 	return fetch(
 		`${BASE_URL}?units=metric&lang=es&appid=${API_KEY}&q=${city}`
 	).then((response) => {

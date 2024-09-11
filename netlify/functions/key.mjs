@@ -1,5 +1,5 @@
 export default async (req, context) => {
-	return new Response(`Probando`);
+	return new Response(Netlify.env.get("OPEN_WEATHER_KEY"));
 };
 
 export const config = {
